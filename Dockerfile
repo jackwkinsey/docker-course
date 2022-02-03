@@ -14,7 +14,9 @@ RUN npm install
 # Expose port 80 to local system from container.
 # This instruction is more for documentation as it is optional.
 # However it is recommended to include so it is easy to find what port config to use
-# when running the command `docker run <image>` 
+# when running the command `docker run <image>`.
+# NOTE: if you use the `-P` command to publish all exposed ports then this
+# instruction is MANDATORY!
 EXPOSE 80
 
 # CMD instructions run when a container is started based on the image

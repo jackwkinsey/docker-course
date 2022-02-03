@@ -9,5 +9,5 @@ app.get('/', (req, res) => {
 
 await connectToDatabase();
 
-app.listen(3000);
+app.listen(3000, () => console.log("🚀 App is listening on port 3000!"));
 

@@ -1,13 +1,26 @@
-FROM node:14
+# Set the base image to use for our custom image.
+FROM node
 
+# Set the working directory to use for commands (e.g. npm install runs in working directory)
 WORKDIR /app
 
-COPY package.json .
+# First path = path in Host file system
+# Second path = path in image/container file system
+COPY . /app
 
+# RUN instructions run when the image is being created
 RUN npm install
 
-COPY . .
+# Expose port 80 to local system from container.
+# This instruction is more for documentation as it is optional.
+# However it is recommended to include so it is easy to find what port config to use
+# when running the command `docker run <image>` 
+EXPOSE 80
 
-EXPOSE 3000
+# CMD instructions run when a container is started based on the image
+CMD [ "node", "server.js" ]
 
-CMD [ "node", "app.mjs" ]
+# If you don't specify a CMD instruction, the CMD of the base image is executed.
+# If no base image or CMD are provided, you'll get an error.
+
+# CMD instructions should always be last in your Dockerfile.

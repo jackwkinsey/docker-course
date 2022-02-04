@@ -4,12 +4,16 @@ FROM node
 # Set the working directory to use for commands (e.g. npm install runs in working directory)
 WORKDIR /app
 
-# First path = path in Host file system
-# Second path = path in image/container file system
-COPY . /app
+# Copy package.json over and run npm install before copying over other source code.
+# This ensures that `npm install` doesn't have to run every time some of the code changes.
+COPY package.json /app
 
 # RUN instructions run when the image is being created
 RUN npm install
+
+# First path = path in Host file system
+# Second path = path in image/container file system
+COPY . /app
 
 # Expose port 80 to local system from container.
 # This instruction is more for documentation as it is optional.
